@@ -4,7 +4,7 @@ const { loginUserHandler, registrationUserHandler } = require('../controller/han
 module.exports = (fastify, option, done) => {
     fastify.post('/login', {
         schema: loginSchema,
-        handler: loginUserHandler
+        handler: loginUserHandler,
     })
     fastify.post('/register', {
         schema: registrationSchema,
