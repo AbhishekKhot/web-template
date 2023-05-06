@@ -13,7 +13,8 @@ const sequelize = new Sequelize(
 )
 
 const db = {
-    User: require('./User')(sequelize, Sequelize.DataTypes)
+    User: require('./User')(sequelize, Sequelize.DataTypes),
+    Tweet: require('./Tweet')(sequelize, Sequelize.DataTypes)
 }
 
 Object.keys(db).forEach((modelName) => {
@@ -24,6 +25,7 @@ Object.keys(db).forEach((modelName) => {
 
 db.sequelize = sequelize
 db.Sequelize = Sequelize
+db.Op = Sequelize.Op
 
 module.exports = db
 

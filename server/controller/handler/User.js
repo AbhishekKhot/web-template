@@ -8,7 +8,17 @@ async function registrationUserHandler(request, reply) {
     return await authService.registrationUser(request.body, reply)
 }
 
+async function forgotPasswordHandler(request, reply) {
+    return await authService.forgotPassword(request.body, reply)
+}
+
+async function resetPasswordHandler(request, reply) {
+    return await authService.resetPassword(request.body, request.params, reply)
+}
+
 module.exports = {
     loginUserHandler,
-    registrationUserHandler
+    registrationUserHandler,
+    forgotPasswordHandler,
+    resetPasswordHandler
 }

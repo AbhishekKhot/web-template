@@ -1,5 +1,15 @@
-const { loginSchema, registrationSchema } = require('../controller/schema/User')
-const { loginUserHandler, registrationUserHandler } = require('../controller/handler/User')
+const {
+    loginSchema,
+    registrationSchema,
+    forgotPasswordSchema,
+    resetPasswordsSchema,
+} = require('../controller/schema/User')
+const {
+    loginUserHandler,
+    registrationUserHandler,
+    forgotPasswordHandler,
+    resetPasswordHandler
+} = require('../controller/handler/User')
 
 module.exports = (fastify, option, done) => {
     fastify.post('/login', {
@@ -10,6 +20,13 @@ module.exports = (fastify, option, done) => {
         schema: registrationSchema,
         handler: registrationUserHandler
     })
-
+    fastify.post('/forgotpassword', {
+        schema: forgotPasswordSchema,
+        handler: forgotPasswordHandler
+    })
+    fastify.post('/resetpassword/:id', {
+        schema: resetPasswordsSchema,
+        handler: resetPasswordHandler
+    })
     done();
 }

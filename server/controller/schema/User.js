@@ -2,6 +2,7 @@ const loginSchema = {
     schema: {
         body: {
             type: 'object',
+            required: ['email', 'password'],
             properties: {
                 email: {
                     type: 'string',
@@ -11,14 +12,13 @@ const loginSchema = {
                     type: 'string'
                 }
             }
-        },
-        required: ["email", "password"]
+        }
     },
     response: {
         200: {
             type: 'object',
-            propeties: {
-                access_token: {
+            properties: {
+                login_token: {
                     type: 'string'
                 }
             }
@@ -35,20 +35,20 @@ const registrationSchema = {
                     type: 'string'
                 },
                 email: {
-                    type: 'string'
+                    type: 'string',
+                    format: 'email'
                 },
                 password: {
                     type: 'string'
                 }
             }
-        },
-        required: ['username', 'email', 'password']
+        }
     },
     response: {
         200: {
             type: 'object',
             properties: {
-                access_token: {
+                registration_token: {
                     type: 'string'
                 }
             }
@@ -56,8 +56,55 @@ const registrationSchema = {
     }
 }
 
+const forgotPasswordSchema = {
+    schema: {
+        body: {
+            type: 'object',
+            required: ['username' || 'email'],
+            properties: {
+                username: {
+                    type: 'string'
+                },
+                email: {
+                    type: 'string'
+                }
+            },
+        }
+    },
+    response: {
+        200: {
+            type: 'object',
+            properties: {
+                message: {
+                    type: 'string'
+                }
+            }
+        }
+    }
+}
+
+const resetPasswordsSchema = {
+    schema: {
+        body: {
+            type: 'object',
+            required: ['password'],
+            properties: {
+                password: {
+                    type: 'string'
+                }
+            }
+        }
+    },
+    response: {
+        200: {
+            type: 'string',
+        }
+    }
+}
 
 module.exports = {
     loginSchema,
-    registrationSchema
+    registrationSchema,
+    forgotPasswordSchema,
+    resetPasswordsSchema
 }
