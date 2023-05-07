@@ -1,4 +1,5 @@
 const { Tweet, Op } = require('../models')
+const { NotFoundError } = require("../lib/serverErrors");
 
 class TweetService {
     async createTweet(request, reply) {
@@ -6,7 +7,7 @@ class TweetService {
             const tweet = await Tweet.create({
                 ...request.body
             })
-            reply.status(200).send(JSON.stringify(tweet))
+            reply.status(200).send(tweet)
         } catch (error) {
             reply.status(500).send({ msg: "Something went wrong" })
         }
@@ -17,7 +18,7 @@ class TweetService {
             const tweet = await Tweet.findByPk(request.params.userId, {
                 attributes: ['id', 'tweet_content', 'tweet_image']
             })
-            if (!tweet) return reply.status(400).send({ msg: "Tweet not found" })
+            if (!tweet) throw new NotFoundError("Tweet not found with id: " + request.params.id);
             reply.status(200).send(tweet)
         } catch (error) {
             reply.status(500).send({ msg: "Something went wrong, Could not load the tweets" })

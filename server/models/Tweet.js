@@ -4,6 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     class Tweet extends Model {
         static associate(models) {
             Tweet.belongsTo(models.User, { foreignKey: "userId", onDelete: "CASCADE" })
+            Tweet.hasMany(models.Comment, {
+                as: 'comments', foreignKey: "tweetId", onDelete: "CASCADE"
+            })
         }
     }
 
@@ -18,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
         tweet_image: {
             type: DataTypes.STRING,
             allowNull: true,
+        },
+        like_count: {
+            type: DataTypes.BIGINT,
+            defaultValue: 0
         }
     }, {
         sequelize,

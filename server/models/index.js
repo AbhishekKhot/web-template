@@ -14,7 +14,9 @@ const sequelize = new Sequelize(
 
 const db = {
     User: require('./User')(sequelize, Sequelize.DataTypes),
-    Tweet: require('./Tweet')(sequelize, Sequelize.DataTypes)
+    Tweet: require('./Tweet')(sequelize, Sequelize.DataTypes),
+    Comment: require('./Comment')(sequelize, Sequelize.DataTypes),
+    FollowerFollowing: require('./Follower_Following')(sequelize, Sequelize.DataTypes)
 }
 
 Object.keys(db).forEach((modelName) => {
