@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         }
 
         static associate(models) {
-            User.hasMany(models.Tweet, { foreignKey: 'userId', onDelete: "CASCADE" })
+            User.hasMany(models.Tweet, { as: "tweets", foreignKey: "userId", onDelete: "CASCADE" })
         }
     }
 

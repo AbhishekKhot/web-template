@@ -1,4 +1,5 @@
 const { User, Op } = require('../models')
+const { NotFoundError } = require("../lib/serverErrors");
 const sendEmail = require('../../server/utils/sendEmail')
 
 class AuthService {
@@ -86,6 +87,19 @@ class AuthService {
             reply.status(500).send({
                 msg: `error occurred while resetting your password ${error}`
             })
+        }
+    }
+
+    async getUserTweets(request, reply) {
+        try {
+            const tweets = await User.findByPk(request.params.id, {
+                attributes: ['id', 'username', 'password'],
+                include: ['tweets']
+            })
+            if (!tweets) throw new NotFoundError("User not found with id: " + request.params.id);
+            reply.status(201).send(JSON.stringify(tweets))
+        } catch (error) {
+            reply.status(500).send({ msg: "Something went wrong" + error })
         }
     }
 }

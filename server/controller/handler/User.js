@@ -16,9 +16,14 @@ async function resetPasswordHandler(request, reply) {
     return await authService.resetPassword(request.body, request.params, reply)
 }
 
+async function userTweetsHandler(request, reply) {
+    return await authService.getUserTweets(request, reply)
+}
+
 module.exports = {
     loginUserHandler,
     registrationUserHandler,
     forgotPasswordHandler,
-    resetPasswordHandler
+    resetPasswordHandler,
+    userTweetsHandler
 }

@@ -102,9 +102,18 @@ const resetPasswordsSchema = {
     }
 }
 
+const userTweetsSchema = {
+    schema: {
+        response: {
+            type: 'object'
+        }
+    }
+}
+
 module.exports = {
     loginSchema,
     registrationSchema,
     forgotPasswordSchema,
-    resetPasswordsSchema
+    resetPasswordsSchema,
+    userTweetsSchema
 }
