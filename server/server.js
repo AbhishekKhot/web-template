@@ -19,6 +19,7 @@ fastify.addHook('preHandler', (request, reply, done) => {
 })
 fastify.register(require('./routes/User'))
 fastify.register(require('./routes/Tweet'))
+fastify.register(require('./routes/User_relation'))
 
 const start = async () => {
     try {
